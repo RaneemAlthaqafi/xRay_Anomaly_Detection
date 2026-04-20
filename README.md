@@ -1,4 +1,4 @@
-# X-Ray Baggage Anomaly Detection — Saudi Ports
+# X-Ray Baggage Anomaly Detection: Saudi Ports
 
 YOLOv11-based detector for 5 prohibited item classes in baggage X-ray scans, with an Arabic-first RTL web UI for port security officers.
 
