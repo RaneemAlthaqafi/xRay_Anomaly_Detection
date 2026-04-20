@@ -1,0 +1,64 @@
+# Data & model weights
+data/raw/
+data/yolo/
+data/weights/*.pt
+data/weights/*.onnx
+data/weights/*.engine
+!data/weights/.gitkeep
+!data/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+
+# Node / Next.js
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+.turbo/
+
+# Env & secrets
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+logs/
+
+# Ultralytics training artifacts
+runs/
+wandb/
+*.pkl
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Docker
+.docker/
