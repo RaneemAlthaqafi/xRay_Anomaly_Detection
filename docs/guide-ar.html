@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>دليل المشروع — نظام كشف التهديدات بالأشعة السينية</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=Amiri:wght@400;700&display=swap');
+
+  @page {
+    size: A4;
+    margin: 18mm 16mm;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    font-family: 'Tajawal', 'Segoe UI', sans-serif;
+    font-size: 13pt;
+    line-height: 1.85;
+    color: #1f2937;
+    background: #ffffff;
+  }
+
+  body { padding: 0; }
+
+  /* ---------- Cover page ---------- */
+  .cover {
+    height: calc(100vh - 36mm);
+    min-height: 240mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 60%, #1d4ed8 100%);
+    color: #fff;
+    padding: 40mm 18mm;
+    page-break-after: always;
+    border-radius: 0;
+  }
+  .cover .badge {
+    display: inline-block;
+    padding: 6px 18px;
+    border: 1.5px solid rgba(255,255,255,0.5);
+    border-radius: 999px;
+    font-size: 11pt;
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+    opacity: 0.9;
+  }
+  .cover h1 {
+    font-size: 34pt;
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 14px;
+  }
+  .cover .subtitle {
+    font-size: 16pt;
+    font-weight: 400;
+    opacity: 0.85;
+    max-width: 540px;
+    margin-bottom: 56px;
+    line-height: 1.7;
+  }
+  .cover .meta {
+    font-size: 11pt;
+    opacity: 0.7;
+    border-top: 1px solid rgba(255,255,255,0.3);
+    padding-top: 16px;
+    width: 300px;
+  }
+  .cover .icon {
+    font-family: 'Amiri', serif;
+    font-size: 80pt;
+    font-weight: 700;
+    margin-bottom: 14px;
+    opacity: 0.92;
+    line-height: 1;
+  }
+
+  /* ---------- General content ---------- */
+  main { padding: 4mm 0; }
+
+  h2 {
+    font-size: 22pt;
+    font-weight: 900;
+    color: #0f172a;
+    margin-top: 12mm;
+    margin-bottom: 8mm;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #1d4ed8;
+    page-break-after: avoid;
+  }
+  h2 .num {
+    display: inline-block;
+    background: #1d4ed8;
+    color: #fff;
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+    text-align: center;
+    border-radius: 50%;
+    margin-left: 14px;
+    font-size: 16pt;
+    vertical-align: middle;
+  }
+
+  h3 {
+    font-size: 15pt;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin: 6mm 0 3mm 0;
+    page-break-after: avoid;
+  }
+
+  p { margin-bottom: 5mm; }
+
+  strong { color: #0f172a; font-weight: 700; }
+
+  .lead {
+    font-size: 14pt;
+    color: #334155;
+    line-height: 2;
+    margin-bottom: 8mm;
+  }
+
+  /* ---------- Callout boxes ---------- */
+  .callout {
+    padding: 5mm 6mm;
+    border-radius: 10px;
+    margin: 5mm 0 6mm 0;
+    page-break-inside: avoid;
+  }
+  .callout .title {
+    font-weight: 700;
+    font-size: 13pt;
+    margin-bottom: 2mm;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .callout .title::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 24px;
+    border-radius: 2px;
+    margin-left: 10px;
+  }
+  .callout.analogy { background: #fef3c7; border: 1px solid #fcd34d; }
+  .callout.analogy .title { color: #92400e; }
+  .callout.analogy .title::before { background: #d97706; }
+
+  .callout.tip { background: #dbeafe; border: 1px solid #93c5fd; }
+  .callout.tip .title { color: #1e40af; }
+  .callout.tip .title::before { background: #2563eb; }
+
+  .callout.note { background: #f3f4f6; border: 1px solid #d1d5db; }
+  .callout.note .title { color: #374151; }
+  .callout.note .title::before { background: #6b7280; }
+
+  /* ---------- Tech cards grid ---------- */
+  .tech-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5mm;
+    margin: 4mm 0;
+  }
+  .tech-card {
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 5mm;
+    page-break-inside: avoid;
+    background: #fafafa;
+  }
+  .tech-card .name {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2mm;
+  }
+  .tech-card .name h4 {
+    font-size: 14pt;
+    font-weight: 900;
+    color: #0f172a;
+  }
+  .tech-card .name .tag {
+    font-size: 9pt;
+    background: #1d4ed8;
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-weight: 500;
+  }
+  .tech-card .role {
+    font-size: 11pt;
+    color: #1e40af;
+    margin-bottom: 3mm;
+    font-weight: 500;
+  }
+  .tech-card .why {
+    font-size: 11pt;
+    color: #4b5563;
+    line-height: 1.7;
+  }
+
+  /* ---------- Checklist ---------- */
+  .checklist {
+    list-style: none;
+    padding: 0;
+  }
+  .checklist li {
+    padding: 3mm 0 3mm 8mm;
+    border-bottom: 1px dashed #e5e7eb;
+    position: relative;
+    padding-right: 12mm;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .checklist li::before {
+    position: absolute;
+    right: 0;
+    top: 3.5mm;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    text-align: center;
+    line-height: 24px;
+    font-weight: 900;
+    font-size: 12pt;
+  }
+  .checklist li.done::before {
+    content: '\2713';
+    background: #16a34a;
+    color: #fff;
+  }
+  .checklist li.progress::before {
+    content: '\22EF';
+    background: #f59e0b;
+    color: #fff;
+  }
+  .checklist li.todo::before {
+    content: '';
+    background: #fff;
+    border: 2px solid #cbd5e1;
+  }
+
+  /* ---------- Steps ---------- */
+  .steps {
+    counter-reset: step;
+    list-style: none;
+    padding: 0;
+  }
+  .steps li {
+    counter-increment: step;
+    position: relative;
+    padding: 4mm 14mm 4mm 4mm;
+    margin-bottom: 3mm;
+    background: #f8fafc;
+    border-radius: 8px;
+    border-right: 4px solid #1d4ed8;
+  }
+  .steps li::before {
+    content: counter(step);
+    position: absolute;
+    right: -6px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    background: #1d4ed8;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 32px;
+    font-weight: 900;
+    font-size: 12pt;
+  }
+  .steps li strong { display: block; margin-bottom: 1mm; }
+
+  /* ---------- Glossary table ---------- */
+  table.glossary {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12pt;
+    margin-top: 3mm;
+  }
+  table.glossary th, table.glossary td {
+    padding: 3mm 4mm;
+    border-bottom: 1px solid #e5e7eb;
+    text-align: right;
+    vertical-align: top;
+  }
+  table.glossary th {
+    background: #1d4ed8;
+    color: #fff;
+    font-weight: 700;
+  }
+  table.glossary td.term { font-weight: 700; color: #1e3a8a; width: 28%; }
+  table.glossary td.en { font-family: 'Segoe UI', sans-serif; color: #6b7280; font-size: 11pt; width: 22%; }
+
+  /* ---------- Page breaks ---------- */
+  .page-break { page-break-before: always; }
+  h2 { page-break-before: auto; }
+
+  /* ---------- Footer ---------- */
+  .footer {
+    margin-top: 16mm;
+    padding-top: 6mm;
+    border-top: 1px solid #e5e7eb;
+    font-size: 10pt;
+    color: #6b7280;
+    text-align: center;
+  }
+
+  /* Inline highlight */
+  .hl { background: #fef3c7; padding: 0 4px; border-radius: 3px; font-weight: 500; }
+
+  /* Two-column pros/cons */
+  .twoc {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4mm;
+    margin: 3mm 0;
+  }
+  .twoc .col {
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 4mm;
+    border-right: 3px solid #1d4ed8;
+  }
+
+  .quote {
+    border-right: 4px solid #1d4ed8;
+    padding: 2mm 5mm;
+    color: #1e293b;
+    font-style: italic;
+    font-size: 14pt;
+    margin: 5mm 0;
+    background: #f1f5f9;
+    border-radius: 0 8px 8px 0;
+  }
+</style>
+</head>
+<body>
+
+<!-- ======================= COVER ======================= -->
+<section class="cover">
+  <div class="icon">AI</div>
+  <div class="badge">دليل المشروع · للمبتدئين</div>
+  <h1>نظام كشف التهديدات<br>في حقائب الأشعة السينية</h1>
+  <div class="subtitle">
+    كيف نبني ذكاءً اصطناعياً يساعد ضباط الأمن<br>في الموانئ السعودية — من البداية حتى النهاية
+  </div>
+  <div class="meta">
+    المشروع: xRay Anomaly Detection<br>
+    الإصدار: 0.1 (المرحلة الأولى)
+  </div>
+</section>
+
+
+<!-- ======================= المحتوى ======================= -->
+<main>
+
+<!-- -------- 1. ليش هالمشروع -------- -->
+<h2><span class="num">1</span>ليش نبني هذا النظام؟</h2>
+
+<p class="lead">
+  في المطارات والموانئ السعودية، كل يوم تمر <strong>آلاف الحقائب والشحنات</strong> من خلال أجهزة الأشعة السينية. الضابط المناوب يقف أمام الشاشة ساعات طويلة، يفحص كل صورة بعينه، باحثاً عن شيء ممنوع: مسدس، سكين، أدوات حادة.
+</p>
+
+<p>
+  المشكلة بسيطة لكن خطيرة: <strong>الإنسان يتعب</strong>. بعد مئات الصور، يبدأ التركيز يضعف، وقد يمر تهديد دون أن يلاحظه أحد. حتى أفضل ضابط قد يفوّته تفصيل صغير في صورة مزدحمة.
+</p>
+
+<div class="callout analogy">
+  <div class="title">شبهه بإيش؟</div>
+  <p>
+    تخيلي مدقق لغوي يقرأ عشرة كتب في اليوم. مهما كان ممتازاً، عيناه ستتعب ويفوّت أخطاء. الحل ليس استبداله — بل إعطاؤه <strong>مساعداً ذكياً</strong> يشير للأماكن التي تحتاج تدقيقاً. هذا بالضبط ما يفعله مشروعنا: لا نستبدل الضابط، بل نضع بجانبه "عيناً" لا تتعب أبداً.
+  </p>
+</div>
+
+<p>
+  النظام اللي نبنيه يستقبل صورة الأشعة، يحلّلها في أقل من نصف ثانية، ويرسم مربعات ملوّنة حول أي شيء ممنوع مع نسبة الثقة ("مسدس — 94%"). الضابط يبقى صاحب القرار النهائي، لكن الآلة قصّرت عليه المسافة.
+</p>
+
+
+<!-- -------- 2. كيف يشتغل الذكاء الاصطناعي -------- -->
+<h2><span class="num">2</span>كيف يشتغل الذكاء الاصطناعي هنا؟</h2>
+
+<p>
+  الذكاء الاصطناعي ليس سحراً، بل يشبه تعليم طفل صغير بطريقة منظمة جداً.
+</p>
+
+<div class="callout analogy">
+  <div class="title">الطفل الذي يتعلم الأشكال</div>
+  <p>
+    لو أريتِ طفلاً صغيراً <strong>آلاف الصور لمسدسات</strong> وقلتِ له مع كل صورة "هذا مسدس"، ثم آلاف الصور لسكاكين وقلتِ "هذا سكين"... بعد فترة، يصبح قادراً على تمييز مسدس جديد لم يره من قبل. الذكاء الاصطناعي يتعلم بنفس المبدأ، لكن بسرعة خارقة وعلى آلاف الصور في الساعة.
+  </p>
+</div>
+
+<h3>المرحلتان الرئيسيتان</h3>
+
+<div class="twoc">
+  <div class="col">
+    <strong>التدريب (Training)</strong>
+    <p style="margin-top:2mm;font-size:11.5pt;">
+      نعطي النموذج آلاف صور الأشعة مع إجاباتها الصحيحة (هذه تحوي مسدساً في هذا المكان). يتعلم تدريجياً ويصحّح أخطاءه. تستغرق <strong>ساعة إلى ساعتين</strong> على حاسوب قوي.
+    </p>
+  </div>
+  <div class="col">
+    <strong>الاستدلال (Inference)</strong>
+    <p style="margin-top:2mm;font-size:11.5pt;">
+      بعد التدريب، النموذج جاهز للعمل. الضابط يرفع صورة، والنموذج يردّ بخلاصة التحليل في أقل من <strong>نصف ثانية</strong>. هذه المرحلة سريعة لأن "العقل" جاهز مسبقاً.
+    </p>
+  </div>
+</div>
+
+<div class="quote">
+  "التدريب مرة واحدة، الاستدلال ملايين المرات" — هذه هي معادلة الذكاء الاصطناعي.
+</div>
+
+<div class="page-break"></div>
+
+
+<!-- -------- 3. التقنيات -------- -->
+<h2><span class="num">3</span>التقنيات اللي نستخدمها</h2>
+
+<p class="lead">
+  كل مشروع برمجي عبارة عن <strong>فريق من الأدوات</strong>، كل أداة لها مهمة. هذا فريقنا:
+</p>
+
+<div class="tech-grid">
+
+  <div class="tech-card">
+    <div class="name"><h4>YOLO v11</h4><span class="tag">الدماغ</span></div>
+    <div class="role">النموذج الذي يكتشف التهديدات في الصور</div>
+    <div class="why">
+      يُلقب بـ "<strong>You Only Look Once</strong>" لأنه سريع جداً. يمسح الصورة بنظرة واحدة ويحدد كل الأشياء فيها. اختبرناه: حقق دقة أكثر من 90% على هذه البيانات.
+    </div>
+  </div>
+
+  <div class="tech-card">
+    <div class="name"><h4>Python</h4><span class="tag">اللغة</span></div>
+    <div class="role">لغة البرمجة الأشهر في الذكاء الاصطناعي</div>
+    <div class="why">
+      بسيطة، مقروءة، وأغلب أدوات الذكاء الاصطناعي مكتوبة بها. تقريباً كل شركة تبني AI تستخدمها — من Google إلى OpenAI.
+    </div>
+  </div>
+
+  <div class="tech-card">
+    <div class="name"><h4>FastAPI</h4><span class="tag">السرفر</span></div>
+    <div class="role">الذي ينقل الصور من المتصفح إلى النموذج</div>
+    <div class="why">
+      مثل <strong>ساعي البريد</strong> بين الموقع والذكاء الاصطناعي. يستقبل الصورة من الضابط، يمررها للنموذج، يعيد له النتيجة. سريع وحديث ويوثّق نفسه تلقائياً.
+    </div>
+  </div>
+
+  <div class="tech-card">
+    <div class="name"><h4>Next.js 15</h4><span class="tag">الواجهة</span></div>
+    <div class="role">الموقع الذي يراه الضابط</div>
+    <div class="why">
+      إطار عمل لبناء مواقع سريعة وجميلة. يدعم العربية واتجاه اليمين لليسار (RTL) بسهولة — وهذا مهم جداً لنا.
+    </div>
+  </div>
+
+  <div class="tech-card">
+    <div class="name"><h4>Docker</h4><span class="tag">التغليف</span></div>
+    <div class="role">صندوق يحوي كل مكونات المشروع</div>
+    <div class="why">
+      يحل مشكلة "<strong>يشتغل عندي ما يشتغل عندك</strong>". نغلّف المشروع مرة واحدة، ويعمل نفس الشيء بالضبط على أي جهاز أو سيرفر.
+    </div>
+  </div>
+
+  <div class="tech-card">
+    <div class="name"><h4>Kaggle</h4><span class="tag">الملعب</span></div>
+    <div class="role">منصة مجانية لتدريب النماذج</div>
+    <div class="why">
+      توفر <strong>GPU مجاني</strong> (كرت شاشة قوي جداً) لأي مبرمج في العالم. بدونها، سنحتاج شراء جهاز بـ 20 ألف ريال. معها، كل شيء مجاني.
+    </div>
+  </div>
+
+  <div class="tech-card">
+    <div class="name"><h4>Git + GitHub</h4><span class="tag">السجل</span></div>
+    <div class="role">تخزين الكود وتتبع تعديلاته</div>
+    <div class="why">
+      مثل <strong>سجل تغييرات</strong> لكل سطر في المشروع. نقدر نرجع أي لحظة لأي نسخة سابقة، ونشتغل فريقاً دون تعارض.
+    </div>
+  </div>
+
+  <div class="tech-card">
+    <div class="name"><h4>Ultralytics</h4><span class="tag">الأداة</span></div>
+    <div class="role">المكتبة التي تُدير YOLO</div>
+    <div class="why">
+      تختصر آلاف الأسطر البرمجية في سطرين. نقول لها "درّب على هذه البيانات"، تهتم بالباقي.
+    </div>
+  </div>
+
+</div>
+
+
+<div class="page-break"></div>
+
+
+<!-- -------- 4. وين وصلنا -------- -->
+<h2><span class="num">4</span>وين وصلنا الآن؟</h2>
+
+<p class="lead">
+  المشروع مقسّم إلى <strong>ثلاث مراحل</strong> (Milestones). نحن في المرحلة الأولى، وهذي قائمة المهام:
+</p>
+
+<h3>المرحلة الأولى (M1): النسخة الأساسية</h3>
+
+<ul class="checklist">
+  <li class="done">تخطيط المشروع كاملاً — الأهداف، التقنيات، التسلسل.</li>
+  <li class="done">بناء "هيكل المشروع" — المجلدات والملفات الأساسية.</li>
+  <li class="done">كتابة دفتر التدريب (Notebook) الجاهز لتشغيله على Kaggle.</li>
+  <li class="done">بناء السيرفر (FastAPI) مع دعم كامل للعربية في رسم النتائج.</li>
+  <li class="done">تحميل خطوط Noto Naskh العربية للعرض الصحيح على الصور.</li>
+  <li class="done">رفع المشروع على GitHub وربطه بالفريق.</li>
+  <li class="progress">تدريب النموذج الفعلي على Kaggle (هذي مهمتك!).</li>
+  <li class="todo">بناء واجهة الموقع (Next.js) باللغة العربية.</li>
+  <li class="todo">تجربة النظام كاملاً من الرفع إلى النتيجة.</li>
+</ul>
+
+
+<!-- -------- 5. وين رايحين -------- -->
+<h2><span class="num">5</span>وين رايحين بعد كذا؟</h2>
+
+<h3>المرحلة الثانية (M2): النسخة المتطورة</h3>
+<p>
+  النسخة الأولى سريعة لكنها "وحيدة" — تعالج صورة واحدة في كل مرة. في المرحلة الثانية نضيف:
+</p>
+<ul style="list-style:square;padding-right:6mm;">
+  <li><strong>طابور انتظار</strong>: الضابط يرفع 50 صورة دفعة واحدة، والنظام يعالجها على التوالي دون انتظار.</li>
+  <li><strong>قاعدة بيانات</strong>: سجل كامل لكل عملية فحص — متى، من، النتيجة — للمراجعة والتدقيق.</li>
+  <li><strong>لوحة تحكم</strong>: إحصائيات، فلاتر حسب النوع والتاريخ والميناء.</li>
+</ul>
+
+<h3>المرحلة الثالثة (M3): جاهز للإنتاج الحقيقي</h3>
+<p>
+  هنا يصبح النظام جاهزاً للنشر في ميناء حقيقي:
+</p>
+<ul style="list-style:square;padding-right:6mm;">
+  <li><strong>تسجيل دخول</strong> لكل ضابط بصلاحيات مختلفة.</li>
+  <li><strong>تعدد الموانئ</strong>: كل ميناء يرى بياناته فقط.</li>
+  <li><strong>تقارير PDF</strong> باللغة العربية قابلة للطباعة الرسمية.</li>
+  <li><strong>مراقبة النظام</strong>: تنبيهات فورية عند أي خلل.</li>
+</ul>
+
+<div class="callout tip">
+  <div class="title">لماذا مراحل؟</div>
+  <p>
+    بناء كل شيء دفعة واحدة وصفة مضمونة للفشل. التدرّج يسمح لنا بـ <strong>التجربة والتعلم والتصحيح</strong> في كل خطوة، ويمنحك وقتاً لفهم كل طبقة قبل أن نبني فوقها.
+  </p>
+</div>
+
+<div class="page-break"></div>
+
+
+<!-- -------- 6. دورك -------- -->
+<h2><span class="num">6</span>دورك الآن: تدريب النموذج</h2>
+
+<p class="lead">
+  مهمتك الأولى في المشروع: <strong>تشغيل دفتر التدريب على Kaggle</strong> والحصول على ملف النموذج المدرّب. هذي الخطوات كاملة.
+</p>
+
+<ol class="steps">
+  <li>
+    <strong>افتحي Kaggle</strong>
+    سجلي حساباً جديداً على <span class="hl">kaggle.com</span> — مجاني بالكامل.
+  </li>
+  <li>
+    <strong>أنشئي دفتراً جديداً</strong>
+    اضغطي زر <span class="hl">Create</span> (أعلى اليسار) ثم <span class="hl">New Notebook</span>.
+  </li>
+  <li>
+    <strong>استوردي دفترنا من GitHub</strong>
+    اختاري <span class="hl">File → Import Notebook → GitHub</span>، ثم الصقي رابط الدفتر الذي أرسلته لك Raneem. اضغطي Import.
+  </li>
+  <li>
+    <strong>فعّلي كرت الشاشة (GPU)</strong>
+    من الشريط الأيمن: اختاري <span class="hl">Accelerator</span> ثم <span class="hl">GPU T4 × 2</span>، وفعّلي <span class="hl">Internet</span>.
+  </li>
+  <li>
+    <strong>أضيفي البيانات</strong>
+    اضغطي <span class="hl">+ Add Data</span>، ابحثي عن <span class="hl">x-ray-baggage-anomaly-detection</span>، واضغطي Add.
+  </li>
+  <li>
+    <strong>شغّلي كل الخلايا</strong>
+    اضغطي زر <span class="hl">Run All</span> (الأعلى). خلّي الصفحة مفتوحة ساعة ونصف تقريباً.
+  </li>
+  <li>
+    <strong>حمّلي النموذج المدرّب</strong>
+    بعد الانتهاء: من الشريط الأيمن اضغطي <span class="hl">Output</span>، حمّلي مجلد <span class="hl">artifacts</span>، وأرسليه لـ Raneem.
+  </li>
+</ol>
+
+<div class="callout note">
+  <div class="title">لا تقلقي لو شفتي كود ما تفهمينه</div>
+  <p>
+    هدف هذه المهمة ليس أن تفهمي كل سطر، بل أن <strong>تتعرفي على الدورة الكاملة</strong>: من فتح Kaggle إلى استخراج النموذج. الفهم يأتي بالتدرج. في كل جلسة لاحقة سنفكك جزءاً من الكود سوياً.
+  </p>
+</div>
+
+
+<!-- -------- 7. المصطلحات -------- -->
+<h2><span class="num">7</span>مصطلحات تحتاجين حفظها</h2>
+
+<table class="glossary">
+  <thead>
+    <tr><th>المصطلح</th><th>بالإنجليزية</th><th>معناه ببساطة</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="term">نموذج</td>
+      <td class="en">Model</td>
+      <td>ملف يحتوي "عقل" الذكاء الاصطناعي بعد التدريب. امتداده غالباً <span class="hl">.pt</span> أو <span class="hl">.onnx</span>.</td>
+    </tr>
+    <tr>
+      <td class="term">وزن</td>
+      <td class="en">Weight</td>
+      <td>الأرقام التي يتعلمها النموذج أثناء التدريب. النموذج = مجموعة أوزان.</td>
+    </tr>
+    <tr>
+      <td class="term">بيانات تدريب</td>
+      <td class="en">Dataset</td>
+      <td>الصور التي يتعلم منها النموذج، مع إجاباتها الصحيحة.</td>
+    </tr>
+    <tr>
+      <td class="term">دورة</td>
+      <td class="en">Epoch</td>
+      <td>مرة كاملة يقرأ فيها النموذج كل بيانات التدريب. نموذجنا يقرأها 100 مرة.</td>
+    </tr>
+    <tr>
+      <td class="term">دقة</td>
+      <td class="en">mAP</td>
+      <td>مقياس جودة النموذج. كلما زاد اقترب من 1 (100%). هدفنا: 0.85 فأكثر.</td>
+    </tr>
+    <tr>
+      <td class="term">واجهة برمجية</td>
+      <td class="en">API</td>
+      <td>وسيلة تبادل بين الموقع والسيرفر. مثل شباك في بنك.</td>
+    </tr>
+    <tr>
+      <td class="term">صندوق محدّد</td>
+      <td class="en">Bounding Box</td>
+      <td>المربع الذي يرسمه النموذج حول الشيء المكتشف.</td>
+    </tr>
+    <tr>
+      <td class="term">مستودع</td>
+      <td class="en">Repository</td>
+      <td>مجلد المشروع المحفوظ على GitHub مع تاريخ كل تعديل.</td>
+    </tr>
+    <tr>
+      <td class="term">دفتر</td>
+      <td class="en">Notebook</td>
+      <td>ملف نكتب فيه كود وشرحاً ونتائج. يستخدم في التعلم والتجريب.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="footer">
+  xRay Anomaly Detection — مشروع داخلي · المرحلة الأولى · إعداد: Raneem
+</div>
+
+</main>
+</body>
+</html>
