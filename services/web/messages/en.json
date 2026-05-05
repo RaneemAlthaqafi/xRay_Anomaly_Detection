@@ -1,0 +1,48 @@
+{
+  "app": {
+    "title": "Baggage X-Ray Threat Detection",
+    "subtitle": "Saudi Ports — AI assistant for security officers",
+    "tagline": "Upload an X-ray image and let AI help you spot threats."
+  },
+  "upload": {
+    "drop_here": "Drop an X-ray image here",
+    "or": "or",
+    "browse": "Choose a file",
+    "hint": "Supported: JPG, PNG, WebP — max 10 MB",
+    "uploading": "Analyzing...",
+    "reset": "Analyze another image",
+    "error_size": "Image exceeds the maximum size (10 MB)",
+    "error_type": "Unsupported file type",
+    "error_network": "Could not reach the API. Make sure it's running."
+  },
+  "results": {
+    "title": "Analysis result",
+    "no_detections": "No threats detected in this image.",
+    "no_detections_hint": "This does not mean the bag is definitively safe — the AI is an assistant; the officer makes the final call.",
+    "found": "{count} potential threats detected",
+    "found_one": "1 potential threat detected",
+    "found_two": "2 potential threats detected",
+    "image_label": "Annotated image",
+    "details": "Detection details",
+    "table_class": "Class",
+    "table_confidence": "Confidence",
+    "table_severity": "Severity",
+    "table_position": "Position",
+    "inference_time": "Inference time: {ms} ms",
+    "model_name": "Model: {name}",
+    "image_size": "Image size: {w}×{h} px"
+  },
+  "severity": {
+    "high": "High",
+    "medium": "Medium",
+    "low": "Low"
+  },
+  "footer": {
+    "internal": "Internal use only",
+    "version": "Version 0.1 (Milestone 1)"
+  },
+  "language": {
+    "switch_to": "العربية",
+    "current": "English"
+  }
+}

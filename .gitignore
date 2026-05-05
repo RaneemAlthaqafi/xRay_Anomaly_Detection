@@ -7,6 +7,12 @@ data/weights/*.engine
 !data/weights/.gitkeep
 !data/.gitkeep
 
+# Stray weights at repo root (e.g. user-downloaded copies before relocation)
+/best.pt
+/best.pt/
+/best.onnx
+/best.engine
+
 # Python
 __pycache__/
 *.py[cod]
