@@ -27,7 +27,8 @@ class Detector:
                 "Train via notebooks/01_train_yolov11s.ipynb and copy best.pt to data/weights/."
             )
         logger.info("Loading YOLO model from %s", model_path)
-        self.model = YOLO(str(model_path))
+        # Explicit task='detect' so ONNX weights load without metadata lookup.
+        self.model = YOLO(str(model_path), task="detect")
         self.model_name = model_path.name
 
     @classmethod

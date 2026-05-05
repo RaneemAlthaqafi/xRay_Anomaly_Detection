@@ -7,7 +7,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      MODEL_PATH: /app/weights/best.pt
+      MODEL_PATH: /app/weights/best.onnx
       CONF_THRESHOLD: ${CONF_THRESHOLD:-0.25}
       IOU_THRESHOLD: ${IOU_THRESHOLD:-0.45}
       ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost:3000}

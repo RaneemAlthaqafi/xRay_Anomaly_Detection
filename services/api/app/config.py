@@ -6,7 +6,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 
-    MODEL_PATH: Path = Path("/app/weights/best.pt")
+    MODEL_PATH: Path = Path("/app/weights/best.onnx")
     CONF_THRESHOLD: float = 0.25
     IOU_THRESHOLD: float = 0.45
     IMG_SIZE: int = 640
