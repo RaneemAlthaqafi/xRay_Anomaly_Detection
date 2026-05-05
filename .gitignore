@@ -1,6 +1,7 @@
 # Data & model weights
 data/raw/
 data/yolo/
+# (samples/ is intentionally tracked — small CC-BY images for demoing the UI)
 data/weights/*.pt
 data/weights/*.onnx
 data/weights/*.engine
