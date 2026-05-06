@@ -1,0 +1,42 @@
+[
+  {
+    "source": "roboflow:x-ray-baggage-rkyb4/3",
+    "class_id": 0,
+    "class_name_en": "scissors",
+    "class_name_ar": "مقص",
+    "confidence": 0.84,
+    "filename": "0-scissors.jpg"
+  },
+  {
+    "source": "roboflow:x-ray-baggage-rkyb4/3",
+    "class_id": 1,
+    "class_name_en": "gun",
+    "class_name_ar": "مسدس",
+    "confidence": 0.77,
+    "filename": "1-gun.jpg"
+  },
+  {
+    "source": "roboflow:x-ray-baggage-rkyb4/3",
+    "class_id": 2,
+    "class_name_en": "knife",
+    "class_name_ar": "سكين",
+    "confidence": 0.885,
+    "filename": "2-knife.jpg"
+  },
+  {
+    "source": "roboflow:x-ray-baggage-rkyb4/3",
+    "class_id": 3,
+    "class_name_en": "wrench",
+    "class_name_ar": "مفتاح ربط",
+    "confidence": 0.853,
+    "filename": "3-wrench.jpg"
+  },
+  {
+    "source": "roboflow:x-ray-baggage-rkyb4/3",
+    "class_id": 4,
+    "class_name_en": "pliers",
+    "class_name_ar": "كماشة",
+    "confidence": 0.889,
+    "filename": "4-pliers.jpg"
+  }
+]

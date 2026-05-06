@@ -71,6 +71,65 @@ xRay_Detection/
 - Source: [Kaggle — orvile/x-ray-baggage-anomaly-detection](https://www.kaggle.com/datasets/orvile/x-ray-baggage-anomaly-detection)
 - Training reference: [killa92/map-0-9-baggage-anomaly-detection-yolov11](https://www.kaggle.com/code/killa92/map-0-9-baggage-anomaly-detection-yolov11)
 
+## Improving Model Quality
+
+The current `best.onnx` is a runnable baseline. If detections look weak, do not try
+to fix that in the UI; retrain a stronger model and validate it before replacing
+production weights.
+
+Ready hosted model option:
+
+Roboflow Universe has a ready X-ray baggage model (`x-ray-baggage-rkyb4/3`) listed
+with mAP@50 around 94%. To use it for a stronger client demo, set:
+
+```bash
+INFERENCE_PROVIDER=roboflow
+ROBOFLOW_MODEL_ID=x-ray-baggage-rkyb4/3
+ROBOFLOW_API_KEY=your_key_here
+docker compose up -d --build
+```
+
+Colab workflow:
+
+1. Open `notebooks/02_colab_train_high_recall.ipynb` in Colab with a GPU runtime.
+2. Run the label-mapping cell first and visually confirm:
+   `0=gun`, `1=knife`, `2=pliers`, `3=scissors`, `4=wrench`.
+3. Train `yolo11m.pt` first. If the client demo still needs better separation
+   between knife/pliers/scissors, rerun with `yolo11l.pt` or `yolo11x.pt`.
+4. Download `xray_model_artifacts_for_app.zip`, copy `best.onnx` into
+   `data/weights/`, copy the regenerated `demo/` folder into
+   `services/web/public/demo/`, then rebuild.
+
+Or apply the Colab zip automatically:
+
+```bash
+python scripts/apply_colab_artifacts.py xray_model_artifacts_for_app.zip
+docker compose up -d --build
+```
+
+Recommended high-recall training, preferably on Kaggle/Colab with a GPU:
+
+```bash
+python scripts/train_high_recall_yolo.py --device 0 --model yolo11m.pt --epochs 180 --imgsz 832 --batch 8 --export
+```
+
+For a stronger but slower model:
+
+```bash
+python scripts/train_high_recall_yolo.py --device 0 --model yolo11l.pt --epochs 220 --imgsz 832 --batch 6 --export
+```
+
+Quickly audit the current model against bundled samples and compare confidence
+thresholds:
+
+```bash
+python scripts/audit_model.py --model data/weights/best.onnx --images samples
+```
+
+For port-security screening, the API defaults to `CONF_THRESHOLD=0.20` to favor
+recall and reduce missed threats. Raise it only after validation confirms false
+positives are hurting operations more than missed detections.
+
 ## Results
 
 | Metric | Target |

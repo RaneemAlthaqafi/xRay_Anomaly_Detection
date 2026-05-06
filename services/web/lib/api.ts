@@ -16,6 +16,11 @@ export interface DetectResponse {
   image_height: number;
   inference_ms: number;
   model_name: string;
+  risk_level: "clear" | "medium" | "high";
+  risk_score: number;
+  inspection_priority: "normal" | "review" | "urgent";
+  recommended_action_en: string;
+  recommended_action_ar: string;
 }
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";

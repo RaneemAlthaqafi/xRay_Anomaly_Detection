@@ -3,9 +3,11 @@ from pydantic import BaseModel, Field
 
 CLASS_NAMES_EN: list[str] = ["gun", "knife", "pliers", "scissors", "wrench"]
 CLASS_NAMES_AR: list[str] = ["مسدس", "سكين", "كماشة", "مقص", "مفتاح ربط"]
+CLASS_NAMES_AR_BY_EN: dict[str, str] = dict(zip(CLASS_NAMES_EN, CLASS_NAMES_AR))
 
 # Risk tier shown in the UI. Gun/knife = high; the rest = medium.
 CLASS_SEVERITY: list[str] = ["high", "high", "medium", "medium", "medium"]
+CLASS_SEVERITY_BY_EN: dict[str, str] = dict(zip(CLASS_NAMES_EN, CLASS_SEVERITY))
 
 
 class Detection(BaseModel):
@@ -24,3 +26,8 @@ class DetectResponse(BaseModel):
     image_height: int
     inference_ms: float
     model_name: str
+    risk_level: str
+    risk_score: int = Field(..., ge=0, le=100)
+    inspection_priority: str
+    recommended_action_en: str
+    recommended_action_ar: str

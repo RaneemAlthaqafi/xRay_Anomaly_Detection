@@ -9,11 +9,47 @@ from fastapi import APIRouter, File, HTTPException, UploadFile, status
 from ..annotate_ar import annotate
 from ..config import settings
 from ..inference import Detector
+from ..roboflow_inference import RoboflowDetector
 from ..schemas import Detection, DetectResponse
 
 router = APIRouter(prefix="/api", tags=["detection"])
 
 ALLOWED_MIME = {"image/jpeg", "image/png", "image/webp"}
+
+
+def decision_summary(detections: list[dict]) -> dict:
+    if not detections:
+        return {
+            "risk_level": "clear",
+            "risk_score": 0,
+            "inspection_priority": "normal",
+            "recommended_action_en": "Review the full image, then clear the bag if nothing else looks suspicious.",
+            "recommended_action_ar": "راجع الصورة كاملة، ثم اسمح بمرور الحقيبة إذا لم يظهر شيء مشتبه.",
+        }
+
+    severity_weight = {"high": 100, "medium": 72, "low": 45}
+    top = max(
+        detections,
+        key=lambda d: severity_weight.get(d["severity"], 60) * d["confidence"],
+    )
+    risk_score = round(severity_weight.get(top["severity"], 60) * top["confidence"])
+
+    if top["severity"] == "high" or risk_score >= 70:
+        return {
+            "risk_level": "high",
+            "risk_score": min(100, risk_score),
+            "inspection_priority": "urgent",
+            "recommended_action_en": "Hold the bag and send it to manual inspection immediately.",
+            "recommended_action_ar": "أوقف الحقيبة وحوّلها للتفتيش اليدوي فورا.",
+        }
+
+    return {
+        "risk_level": "medium",
+        "risk_score": min(100, risk_score),
+        "inspection_priority": "review",
+        "recommended_action_en": "Review the highlighted area before clearing the bag.",
+        "recommended_action_ar": "راجع المنطقة المحددة قبل السماح بمرور الحقيبة.",
+    }
 
 
 @router.post("/detect", response_model=DetectResponse)
@@ -32,7 +68,7 @@ async def detect(image: UploadFile = File(..., description="X-ray image (JPEG/PN
             detail=f"Image exceeds {settings.MAX_UPLOAD_MB} MB",
         )
 
-    detector = Detector.get()
+    detector = RoboflowDetector.get() if settings.INFERENCE_PROVIDER.lower() == "roboflow" else Detector.get()
     try:
         pil_img, dets, infer_ms = detector.predict(raw)
     except Exception as e:
@@ -54,4 +90,5 @@ async def detect(image: UploadFile = File(..., description="X-ray image (JPEG/PN
         image_height=pil_img.height,
         inference_ms=round(infer_ms, 2),
         model_name=detector.model_name,
+        **decision_summary(dets),
     )

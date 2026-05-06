@@ -52,7 +52,7 @@ export function UploadDropzone({
         if (f) handleFile(f);
       }}
       className={cn(
-        "relative flex flex-col items-center justify-center rounded-2xl border-2 border-dashed p-12 transition-all",
+        "relative flex min-h-[320px] flex-col items-center justify-center rounded-lg border-2 border-dashed p-10 transition-all",
         isDragging
           ? "border-brand-600 bg-brand-50"
           : "border-slate-300 bg-slate-50 hover:border-brand-400 hover:bg-brand-50/40",

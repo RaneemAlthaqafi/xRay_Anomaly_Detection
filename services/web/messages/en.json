@@ -1,45 +1,64 @@
 {
   "app": {
-    "title": "Baggage X-Ray Threat Detection",
-    "subtitle": "Saudi Ports — AI assistant for security officers",
-    "tagline": "Upload an X-ray image and let AI help you spot threats."
+    "title": "X-Ray Bag Check",
+    "subtitle": "Border inspection screen",
+    "tagline": "Upload the bag X-ray, then review the highlighted areas before choosing the inspection action.",
+    "step_upload": "1. Upload image",
+    "step_upload_hint": "Use the X-ray image for the current bag.",
+    "step_review": "2. Review highlights",
+    "step_review_hint": "Check the marked boxes and listed items.",
+    "step_action": "3. Take action",
+    "step_action_hint": "Clear the bag or send it to manual inspection.",
+    "demo_title": "Quick demo examples",
+    "demo_hint": "Selected training images with matching verified labels."
   },
   "upload": {
-    "drop_here": "Drop an X-ray image here",
+    "drop_here": "Drop the X-ray image here",
     "or": "or",
-    "browse": "Choose a file",
-    "hint": "Supported: JPG, PNG, WebP — max 10 MB",
-    "uploading": "Analyzing...",
-    "reset": "Analyze another image",
+    "browse": "Choose image",
+    "hint": "JPG, PNG, WebP - max 10 MB",
+    "uploading": "Checking...",
+    "reset": "Check another image",
     "error_size": "Image exceeds the maximum size (10 MB)",
     "error_type": "Unsupported file type",
-    "error_network": "Could not reach the API. Make sure it's running."
+    "error_network": "Could not reach the server. Make sure the system is running."
   },
   "results": {
-    "title": "Analysis result",
-    "no_detections": "No threats detected in this image.",
-    "no_detections_hint": "This does not mean the bag is definitively safe — the AI is an assistant; the officer makes the final call.",
-    "found": "{count} potential threats detected",
-    "found_one": "1 potential threat detected",
-    "found_two": "2 potential threats detected",
-    "image_label": "Annotated image",
-    "details": "Detection details",
-    "table_class": "Class",
-    "table_confidence": "Confidence",
-    "table_severity": "Severity",
+    "title": "Check result",
+    "no_detections": "No prohibited item is clearly visible.",
+    "no_detections_hint": "Review the image using the approved procedure before clearing the bag.",
+    "found": "{count} areas need review",
+    "found_one": "1 area needs review",
+    "found_two": "2 areas need review",
+    "image_label": "Bag image",
+    "details": "Highlighted areas",
+    "decision": "Required action",
+    "recommended_action": "What to do now",
+    "risk_score": "Suspicion score",
+    "priority": "Priority",
+    "items_count": "Highlighted areas: {count}",
+    "table_class": "Possible item",
+    "table_confidence": "Visibility",
+    "table_severity": "Importance",
     "table_position": "Position",
-    "inference_time": "Inference time: {ms} ms",
-    "model_name": "Model: {name}",
-    "image_size": "Image size: {w}×{h} px"
+    "image_size": "Size: {w}×{h} px"
   },
   "severity": {
     "high": "High",
     "medium": "Medium",
     "low": "Low"
   },
+  "risk": {
+    "clear": "No suspicious area",
+    "medium": "Review needed",
+    "high": "Urgent inspection",
+    "normal": "Normal",
+    "review": "Review",
+    "urgent": "Urgent"
+  },
   "footer": {
-    "internal": "Internal use only",
-    "version": "Version 0.1 (Milestone 1)"
+    "internal": "For checkpoint use",
+    "version": "Ready for screening"
   },
   "language": {
     "switch_to": "العربية",

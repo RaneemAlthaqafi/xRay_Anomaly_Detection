@@ -8,6 +8,10 @@ services:
       - "8000:8000"
     environment:
       MODEL_PATH: /app/weights/best.onnx
+      INFERENCE_PROVIDER: ${INFERENCE_PROVIDER:-local}
+      ROBOFLOW_MODEL_ID: ${ROBOFLOW_MODEL_ID:-x-ray-baggage-rkyb4/3}
+      ROBOFLOW_API_KEY: ${ROBOFLOW_API_KEY:-}
+      ROBOFLOW_API_BASE: ${ROBOFLOW_API_BASE:-https://serverless.roboflow.com}
       CONF_THRESHOLD: ${CONF_THRESHOLD:-0.25}
       IOU_THRESHOLD: ${IOU_THRESHOLD:-0.45}
       ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost:3000}

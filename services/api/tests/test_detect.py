@@ -19,7 +19,7 @@ def client() -> TestClient:
 
 @pytest.fixture
 def sample_image_bytes() -> bytes:
-    """A blank RGB image — sufficient to exercise the pipeline end-to-end."""
+    """A blank RGB image is sufficient to exercise the pipeline end-to-end."""
     img = Image.new("RGB", (640, 640), color=(128, 128, 128))
     buf = io.BytesIO()
     img.save(buf, format="JPEG")
@@ -30,6 +30,32 @@ def test_health(client: TestClient) -> None:
     r = client.get("/health")
     assert r.status_code == 200
     assert r.json() == {"status": "ok"}
+
+
+def test_model_status(client: TestClient) -> None:
+    r = client.get("/api/model-status")
+    assert r.status_code == 200
+    data = r.json()
+    assert data["provider"] in {"local", "roboflow"}
+    assert data["model_name"]
+    assert "connected" in data
+    expected_by_provider = {
+        "local": {
+            "0": "gun",
+            "1": "knife",
+            "2": "pliers",
+            "3": "scissors",
+            "4": "wrench",
+        },
+        "roboflow": {
+            "0": "scissors",
+            "1": "gun",
+            "2": "knife",
+            "3": "wrench",
+            "4": "pliers",
+        },
+    }
+    assert data["class_names"] == expected_by_provider[data["provider"]]
 
 
 def test_classes_endpoint(client: TestClient) -> None:
@@ -50,8 +76,8 @@ def test_unsupported_media_type(client: TestClient) -> None:
 
 
 @pytest.mark.skipif(
-    not Path(settings.MODEL_PATH).exists(),
-    reason=f"Weights not found at {settings.MODEL_PATH} — skipping model-dependent test.",
+    not Path(settings.effective_model_path).exists(),
+    reason=f"Weights not found at {settings.effective_model_path} - skipping model-dependent test.",
 )
 def test_detect_roundtrip(client: TestClient, sample_image_bytes: bytes) -> None:
     r = client.post(
@@ -65,3 +91,5 @@ def test_detect_roundtrip(client: TestClient, sample_image_bytes: bytes) -> None
     assert data["image_width"] == 640
     assert data["image_height"] == 640
     assert data["inference_ms"] > 0
+    assert "risk_level" in data
+    assert "recommended_action_en" in data
